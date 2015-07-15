@@ -3,34 +3,49 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package br.ifes.poo.controleclima.cdp;
 
-import br.ifes.poo.controleclima.cdp.ArCondicionado;
-import br.ifes.poo.controleclima.cdp.SensorPessoas;
-import br.ifes.poo.controleclima.cdp.SensorTemperatura;
-import br.ifes.poo.controleclima.cdp.TemperaturaMonitor;
-import org.junit.Assert;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.Test;;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
- * @author aeller
+ * @author Alessandro Eller
  */
-public class TesteControleClima {
+public class ArCondicionadoTest {
     
-    public TesteControleClima() {
+    public ArCondicionadoTest() {
     }
     
-  
+    @BeforeClass
+    public static void setUpClass() {
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+    }
     
     @Before
     public void setUp() {
-        
     }
     
+    @After
+    public void tearDown() {
+    }
+
+    /**
+     * Test of getTemperatura method, of class ArCondicionado.
+     */
+    
+    
     @Test
-    public testeControleTemperatura(){
-        TemperaturaMonitor monitor = new TemperaturaMonitor(56);
+    public void  testControleTemperatura(){
+        float temperaturaFixa = 22;
+        TemperaturaMonitor monitor = new TemperaturaMonitor(temperaturaFixa);
         
         ArCondicionado ar = new ArCondicionado();
         ar.addObserver(monitor);
@@ -43,13 +58,9 @@ public class TesteControleClima {
         ar.addSensorTemperatura(new SensorTemperatura(25));
         ar.addSensorTemperatura(new SensorTemperatura(26));
         
-        float resultado = ar.getTemperatura();
-        Assert.assertEquals(35.0, resultado);
-        
         ar.calculaTemperatura();
         
-        resultado = ar.getTemperatura();
-        
-        Assert.assertEquals(25.0 ,resultado);
+        assertEquals(ar.getTemperatura(), temperaturaFixa,0);
     }
+
 }
